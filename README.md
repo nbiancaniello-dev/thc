@@ -6,6 +6,8 @@ Every request must only set the `Content-Type: application/json`.
 
 [![CircleCI](https://dl.circleci.com/status-badge/img/circleci/82UCLJQ6A8o5rRSH4fZh65/5RcRNgdavvWGzeAteUNeQ3/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/82UCLJQ6A8o5rRSH4fZh65/5RcRNgdavvWGzeAteUNeQ3/tree/master)
 
+[![Coverage Status](https://coveralls.io/repos/github/nbiancaniello-dev/thc_pf/badge.svg?branch=master)](https://coveralls.io/github/nbiancaniello-dev/thc_pf?branch=master)
+
 ### Features
 - Create new Users
 - Get Users List
