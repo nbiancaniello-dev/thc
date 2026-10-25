@@ -1,7 +1,7 @@
 [project]
 name = "cursor-challenge-backend"
 version = "0.1.0"
-description = "Add your description here"
+description = "Take Home Challenge Template"
 readme = "README.md"
 authors = [
     { name = "nbiancaniello", email = "nbiancaniello.dev@gmail.com" }
@@ -19,9 +19,6 @@ dependencies = [
     "pytest-cov>=7.1.0",
     "sqlalchemy[asyncio]>=2.1.4",
 ]
-
-[project.scripts]
-cursor-challenge-backend = "cursor_challenge_backend:main"
 
 [build-system]
 requires = ["uv_build>=0.12.13,<0.13.0"]
