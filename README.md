@@ -4,7 +4,7 @@ You have to build a microservice that exposes a REST API with two different tabl
 Both tables should be open to creation, deletion, or update. 
 Every request must only set the `Content-Type: application/json`.
 
-[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/82UCLJQ6A8o5rRSH4fZh65/4a59d658-599d-47b6-80ec-ef9efe816d8a/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/82UCLJQ6A8o5rRSH4fZh65/4a59d658-599d-47b6-80ec-ef9efe816d8a/tree/main) [![Coverage Status](https://coveralls.io/repos/github/nbiancaniello-dev/thc_pf/badge.svg?branch=master)](https://coveralls.io/github/nbiancaniello-dev/thc_pf?branch=master)
+[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/82UCLJQ6A8o5rRSH4fZh65/ABWTL7PQ4uMpeh4uoHEsn9/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/82UCLJQ6A8o5rRSH4fZh65/ABWTL7PQ4uMpeh4uoHEsn9/tree/master) [![Coverage Status](https://coveralls.io/repos/github/nbiancaniello-dev/thc/badge.svg?branch=master)](https://coveralls.io/github/nbiancaniello-dev/thc?branch=master)
 
 ### Features
 - Create new Users
