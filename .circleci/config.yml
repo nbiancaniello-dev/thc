@@ -64,6 +64,7 @@ jobs:
       - run:
           name: Run tests
           command: |
+            export PYTHONPATH=.:$PYTHONPATH
             uv run pytest -v
 
 workflows:
