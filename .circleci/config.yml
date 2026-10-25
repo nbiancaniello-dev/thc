@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  codecov: codecov/codecov@6.1.0
+  coveralls: coveralls/coveralls@2.2.5
 
 jobs:
   build_and_test:
@@ -63,9 +63,10 @@ jobs:
       - run:
           name: Run tests
           command: |
-            uv run --group dev pytest -v --cov .
+            uv run --group dev pytest -v --cov . --cov-report=lcov
 
-      - codecov/upload
+      - coveralls/upload:
+          coverage_file: coverage.lcov
 
 workflows:
   build_test_deploy:
