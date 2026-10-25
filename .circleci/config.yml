@@ -1,9 +1,12 @@
 version: 2.1
 
+orbs:
+  codecov: codecov/codecov@6.1.0
+
 jobs:
   build_and_test:
     docker:
-      - image: cimg/python:3.14  # Specify your target Python version
+      - image: cimg/python:3.14
         environment:
           DATABASE_URL: postgresql+psycopg://postgres:challenge@localhost:5432/test_postgres
           SECRET_KEY: test-secret-key-for-testing-only
@@ -60,7 +63,9 @@ jobs:
       - run:
           name: Run tests
           command: |
-            uv run --group dev pytest -v
+            uv run --group dev pytest -v --cov .
+
+      - codecov/upload
 
 workflows:
   build_test_deploy:
