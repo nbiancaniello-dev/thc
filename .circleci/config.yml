@@ -1,12 +1,9 @@
 version: 2.1
 
-orbs:
-  python: circleci/python@3.0.0
-
 jobs:
   build_and_test:
     docker:
-      - image: cimg/python:3.12
+      - image: cimg/python:3.14  # Specify your target Python version
         environment:
           DATABASE_HOST: postgres
           DATABASE_PORT: 5432
@@ -27,14 +24,12 @@ jobs:
     steps:
       - checkout
 
-      - python/install-packages:
-          pkg-manager: uv
-
       - run:
-          name: Install PostgreSQL client
+          name: Install PostgreSQL client and uv
           command: |
             sudo apt-get update
             sudo apt-get install -y postgresql-client
+            curl -LsSf https://astral.sh/uv/install.sh | sh
 
       - restore_cache:
           keys:
