@@ -19,6 +19,7 @@ services:
 
   - type: pserv
     name: thc-db
+    runtime: docker
     plan: starter
     region: oregon
     ipAllowList: []  # Allow from all IPs
