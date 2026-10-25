@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: cimg/python:3.14  # Specify your target Python version
         environment:
-          DATABASE_HOST: postgres
+          DATABASE_HOST: localhost
           DATABASE_PORT: 5432
           DATABASE_USER: postgres
           DATABASE_PASSWORD: challenge
@@ -47,7 +47,7 @@ jobs:
       - run:
           name: Wait for PostgreSQL
           command: |
-            until pg_isready -h postgres -p 5432 -U postgres; do
+            until pg_isready -h localhost -p 5432 -U postgres; do
               sleep 1
             done
 
