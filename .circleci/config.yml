@@ -13,7 +13,6 @@ jobs:
           DATABASE_SYNC: "true"
 
       - image: cimg/postgres:16.4
-        name: postgres
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: challenge
@@ -55,7 +54,7 @@ jobs:
 
       - run:
           name: Wait for PostgreSQL
-          command: dockerize -wait tcp://127.0.0.1:5432 -timeout 1m
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run:
           name: Run migrations
