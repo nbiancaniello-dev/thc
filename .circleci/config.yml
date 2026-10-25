@@ -55,10 +55,7 @@ jobs:
 
       - run:
           name: Wait for PostgreSQL
-          command: |
-            until pg_isready -h localhost -p 5432 -U postgres; do
-              sleep 1
-            done
+          command: dockerize -wait tcp://127.0.0.1:5432 -timeout 1m
 
       - run:
           name: Run migrations
