@@ -1,8 +1,6 @@
 
 .git/
 
-tests/
-
 .python-version
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,macos,visualstudiocode,dotenv

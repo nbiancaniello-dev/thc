@@ -5,12 +5,9 @@ jobs:
     docker:
       - image: cimg/python:3.14  # Specify your target Python version
         environment:
-          DATABASE_HOST: localhost
-          DATABASE_PORT: 5432
-          DATABASE_USER: postgres
-          DATABASE_PASSWORD: challenge
-          DATABASE_NAME: test_postgres
-          DATABASE_SYNC: "true"
+          DATABASE_URL: postgresql+psycopg://postgres:challenge@localhost:5432/test_postgres
+          SECRET_KEY: test-secret-key-for-testing-only
+          PYTHONPATH: src:.
 
       - image: cimg/postgres:16.4
         environment:
@@ -58,14 +55,12 @@ jobs:
 
       - run:
           name: Run migrations
-          command: |
-            uv run alembic upgrade head
+          command: uv run alembic upgrade head
 
       - run:
           name: Run tests
           command: |
-            export PYTHONPATH=.:$PYTHONPATH
-            uv run pytest -v
+            uv run --group dev pytest -v
 
 workflows:
   build_test_deploy:

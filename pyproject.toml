@@ -31,4 +31,5 @@ dev = [
 ]
 
 [tool.pytest.ini_options]
-pythonpath = ["src"]  # or ["."] if main.py is in the root
+testpaths = ["tests"]
+pythonpath = [".", "src"]

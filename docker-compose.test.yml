@@ -22,9 +22,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    entrypoint: []
     command: alembic upgrade head
     environment:
-      DATABASE_URL: postgresql+psycopg://postgres:challenge@db:5432/postgres
+      DATABASE_URL: postgresql+psycopg://postgres:challenge@db:5432/test_postgres
+      SECRET_KEY: test-secret-key-for-testing-only
     depends_on:
       db:
         condition: service_healthy
@@ -37,9 +39,10 @@ services:
       target: builder
     # Override both ENTRYPOINT and CMD so it never starts FastAPI
     entrypoint: []
-    command: uv run --group dev pytest src/tests/ -v
+    command: uv run --group dev pytest tests/ -v
     environment:
       DATABASE_URL: postgresql+psycopg://postgres:challenge@db:5432/test_postgres
+      SECRET_KEY: test-secret-key-for-testing-only
     depends_on:
       migrate:
         condition: service_completed_successfully
