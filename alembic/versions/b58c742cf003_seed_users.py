@@ -22,20 +22,21 @@ def upgrade() -> None:
     """Seed demo users."""
     password_hash = PasswordHash.recommended()
 
+    users_table = sa.table(
+        "users",
+        sa.column("username", sa.String),
+        sa.column("email", sa.String),
+        sa.column("password_hash", sa.String),
+    )
+
     demo_users = [
-        ('admin', 'admin@demo.com', password_hash.hash('admin123')),
-        ('john_doe', 'john@demo.com', password_hash.hash('password123')),
-        ('jane_smith', 'jane@demo.com', password_hash.hash('securepass456')),
-        ('test_user', 'test@demo.com', password_hash.hash('testpass789')),
+        {"username": "admin", "email": "admin@demo.com", "password_hash": password_hash.hash("admin123")},
+        {"username": "john_doe", "email": "john@demo.com", "password_hash": password_hash.hash("password123")},
+        {"username": "jane_smith", "email": "jane@demo.com", "password_hash": password_hash.hash("securepass456")},
+        {"username": "test_user", "email": "test@demo.com", "password_hash": password_hash.hash("testpass789")},
     ]
 
-    for username, email, password_hash_val in demo_users:
-        op.execute(
-            sa.text(
-                "INSERT INTO users (username, email, password_hash) VALUES (:username, :email, :password_hash)"
-            ),
-            {"username": username, "email": email, "password_hash": password_hash_val}
-        )
+    op.bulk_insert(users_table, demo_users)
 
 
 def downgrade() -> None:
