@@ -45,6 +45,7 @@ def test_engine():
 @pytest.fixture(scope="session")
 async def setup_database(test_engine):
     async with test_engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
 
     yield
@@ -95,4 +96,4 @@ async def client(
     ) as ac:
         yield ac
 
-    app.dependency_overrides.clear()
+    app.dependency_overrides.clear()
