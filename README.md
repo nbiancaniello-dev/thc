@@ -1,17 +1,19 @@
 # Cursor Backend Challenge
 
-You have to build a microservice that exposes a REST API with two different tables: `users` and `states`. 
-Both tables should be open to creation, deletion, or update. 
+You have to build a microservice that exposes a REST API with table: `users`. 
+The table should be open to creation, deletion, or update. 
 Every request must only set the `Content-Type: application/json`.
 
 [![CircleCI](https://dl.circleci.com/status-badge/img/circleci/82UCLJQ6A8o5rRSH4fZh65/ABWTL7PQ4uMpeh4uoHEsn9/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/82UCLJQ6A8o5rRSH4fZh65/ABWTL7PQ4uMpeh4uoHEsn9/tree/master) [![Coverage Status](https://coveralls.io/repos/github/nbiancaniello-dev/thc/badge.svg?branch=master)](https://coveralls.io/github/nbiancaniello-dev/thc?branch=master)
 
 ### Features
-- Create new Users
-- Get Users List
-- Get User By ID
-- Update User
-- Delete User
+- Create new Users (`POST /api/users`)
+- User Login / Token (`POST /api/users/token`)
+- Current User Profile (`GET /api/users/me`)
+- Get Users List (`GET /api/users`)
+- Get User By ID (`GET /api/users/{user_id}`)
+- Update User (`PATCH /api/users/{user_id}`)
+- Delete User (`DELETE /api/users/{user_id}`)
 
 ## Pre-Requisites
 
@@ -49,12 +51,15 @@ chmod 771 ./up_test.sh
 - pytest: pytest-9.1.1
 - postgres: 18.6 + psycopg
 
-## Decisions made
-
-- Clean Architecture: To be able to handle further changes in the future in a proper way.
-- Alembic: Because it allows migration over changes in the database and it is widely used and many developers use it.
-- Docker: To make it portable
-- Pytest: It is the most used framework, many developers use it. (Review)
+## Decisions made & Architecture
+- **Clean Architecture (Modular Feature-First)**: Organized into feature modules (`users`, `states`) following the **Controller (Router) -> Service -> Repository** pattern (akin to NestJS modules).
+  - **Routers / Controllers**: Exclusively manage HTTP transport, status codes, and schema validation.
+  - **Services**: Encapsulate all domain rules and business logic; completely independent of web frameworks and database drivers.
+  - **Repositories**: Abstract database persistence using SQLAlchemy async sessions.
+  - **Core Exceptions**: Clean domain exceptions (`DuplicateResourceError`, `ResourceNotFoundError`, `ForbiddenError`, `InvalidCredentialsError`) mapped cleanly at the transport boundary.
+- **Alembic**: Database migrations with version tracking for schema changes and demo seeds.
+- **Docker & Compose**: Portable multi-container environment for development and testing.
+- **Pytest**: Integration testing with transactional test fixtures and unit testing with mocked repositories (90%+ code coverage).
 
 ## Route
 

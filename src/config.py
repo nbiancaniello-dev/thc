@@ -1,17 +1,3 @@
-from pydantic import SecretStr
-from pathlib import Path
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from core.config import Settings, settings
 
-class Settings(BaseSettings):
-    model_config = SettingsConfigDict(
-        env_file=Path(__file__).parent / ".env",
-        env_file_encoding="utf-8"
-    )
-
-    database_url: str
-
-    secret_key: SecretStr
-    algorithm: str = "HS256"
-    access_token_expire_minutes: int = 30
-
-settings = Settings() # Loaded from .env file
+__all__ = ["Settings", "settings"]

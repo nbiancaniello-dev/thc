@@ -2,7 +2,7 @@ from typing import Annotated
 from fastapi import FastAPI, Depends, HTTPException, status, Request
 from contextlib import asynccontextmanager
 from database import engine, get_db
-from routers import users
+from src.modules.users.router import router as users_router
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -14,7 +14,7 @@ async def lifespan(_app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-app.include_router(users.router, prefix="/api/users", tags=["users"])
+app.include_router(users_router, prefix="/api/users", tags=["users"])
 
 @app.get("/", include_in_schema=False)
 def home():
