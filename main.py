@@ -12,7 +12,7 @@ async def lifespan(_app: FastAPI):
     #Shutdown
     await engine.dispose()
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(lifespan=lifespan, docs_url="/api")
 
 app.include_router(users_router, prefix="/api/users", tags=["users"])
 

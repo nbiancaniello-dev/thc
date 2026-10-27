@@ -4,7 +4,19 @@ You have to build a microservice that exposes a REST API with table: `users`.
 The table should be open to creation, deletion, or update. 
 Every request must only set the `Content-Type: application/json`.
 
-[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/82UCLJQ6A8o5rRSH4fZh65/ABWTL7PQ4uMpeh4uoHEsn9/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/82UCLJQ6A8o5rRSH4fZh65/ABWTL7PQ4uMpeh4uoHEsn9/tree/master) [![Coverage Status](https://coveralls.io/repos/github/nbiancaniello-dev/thc/badge.svg?branch=master)](https://coveralls.io/github/nbiancaniello-dev/thc?branch=master)
+### Deployed App Running on RENDER
+
+- [SWAGGER](https://thc-template.onrender.com/api)
+
+[![CircleCI](https://dl.circleci.com/status-badge/img/circleci/82UCLJQ6A8o5rRSH4fZh65/ABWTL7PQ4uMpeh4uoHEsn9/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/82UCLJQ6A8o5rRSH4fZh65/ABWTL7PQ4uMpeh4uoHEsn9/tree/master) 
+
+[![Coverage Status](https://coveralls.io/repos/github/nbiancaniello-dev/thc/badge.svg?branch=master)](https://coveralls.io/github/nbiancaniello-dev/thc?branch=master)
+
+### How to run locally coveralls
+
+```
+COVERALLS_REPO_TOKEN=onrB7IhBLp4Ty5K3bmpEIkAGvTCZ2FXkd npm run test:cov
+```
 
 ### Features
 - Create new Users (`POST /api/users`)
@@ -14,6 +26,7 @@ Every request must only set the `Content-Type: application/json`.
 - Get User By ID (`GET /api/users/{user_id}`)
 - Update User (`PATCH /api/users/{user_id}`)
 - Delete User (`DELETE /api/users/{user_id}`)
+- Update Dragon Ball IDs (`PATCH /api/users/{userid}/dragonball`)
 
 ## Pre-Requisites
 
@@ -62,7 +75,7 @@ chmod 771 ./up_test.sh
 
 ## Route
 
-- : [![API Swagger] (https://localhost:3000/docs)]
+- : [![API Swagger] (https://localhost:3000/api)]
 
 ## Env vars should be defined
 
