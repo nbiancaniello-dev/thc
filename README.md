@@ -1,4 +1,4 @@
-# Cursor Backend Challenge
+# Take Home Challenge
 
 You have to build a microservice that exposes a REST API with table: `users`. 
 The table should be open to creation, deletion, or update. 
@@ -37,10 +37,9 @@ chmod 771 ./up_test.sh
 
 ## Areas to improve
 
-- Data should be move from tests to an external file
+- Data should be moved from tests to an external file
 - Generic method should be used to mock endpoints
-- Error handling could be improved (I.E handling non-existing user on Delete)
-- A Seed migration would be useful to have an already working app with data
+- Fix connection from DB IDE with error: `invalid value for parameter "TimeZone": "America/Buenos_Aires"`
 
 ## Techs
 
@@ -52,7 +51,7 @@ chmod 771 ./up_test.sh
 - postgres: 18.6 + psycopg
 
 ## Decisions made & Architecture
-- **Clean Architecture (Modular Feature-First)**: Organized into feature modules (`users`, `states`) following the **Controller (Router) -> Service -> Repository** pattern (akin to NestJS modules).
+- **Clean Architecture (Modular Feature-First)**: Organized into feature modules (`users`) following the **Controller (Router) -> Service -> Repository** pattern.
   - **Routers / Controllers**: Exclusively manage HTTP transport, status codes, and schema validation.
   - **Services**: Encapsulate all domain rules and business logic; completely independent of web frameworks and database drivers.
   - **Repositories**: Abstract database persistence using SQLAlchemy async sessions.
@@ -63,7 +62,7 @@ chmod 771 ./up_test.sh
 
 ## Route
 
-- : [![API Swagger] (https://localhost:3000/api)]
+- : [![API Swagger] (https://localhost:3000/docs)]
 
 ## Env vars should be defined
 

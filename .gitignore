@@ -18,3 +18,7 @@ src/schemas/__pycache__/*
 alembic/__pycache__/*
 lib/__pycache__/*
 tests/__pycache__/*
+
+migrations/__pycache__/*
+.pytest_cache/
+.vscode/

@@ -32,6 +32,7 @@ class UserService:
             username=data.username,
             email=data.email.lower(),
             password_hash=hash_password(data.password),
+            dragon_ball_ids=data.dragon_ball_ids,
         )
         return await self.repository.create(new_user)
 
@@ -101,3 +102,26 @@ class UserService:
             raise ResourceNotFoundError("User not found")
 
         await self.repository.delete(user)
+
+    async def get_by_id_with_dragon_ball(self, id: int) -> dict:
+        result = await self.repository.find_by_id_with_dragon_ball(id)
+        if not result:
+            raise ResourceNotFoundError("User not found")
+        return result
+
+    async def get_all_with_dragon_balls(self) -> list[dict]:
+        users = await self.repository.get_all_with_dragon_balls()
+        if not users:
+            raise ResourceNotFoundError("No users found")
+        return users
+
+    async def update_dragon_ball_ids(self, id: int, current_user_id: int, dragonBallIds: list[int]) -> User:
+        if id != current_user_id:
+            raise ForbiddenError("Not authorized to update this user's dragon ball IDs")
+
+        user = await self.repository.get_by_id(id)
+        if not user:
+            raise ResourceNotFoundError(f"User with ID {id} not found")
+
+        user.dragon_ball_ids = dragonBallIds
+        return await self.repository.update(user, {"dragon_ball_ids": dragonBallIds})

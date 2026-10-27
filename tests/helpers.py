@@ -37,3 +37,41 @@ async def login_user(
 
 def auth_header(token: str) -> dict[str, str]:
     return {"Authorization": f"Bearer {token}"}
+
+
+# Fake payloads shaped like GET https://dragonball-api.com/api/characters/{id}
+FAKE_DRAGON_BALL_CHARACTERS: dict[int, dict] = {
+    1: {
+        "id": 1,
+        "name": "Goku",
+        "ki": "60.000.000",
+        "maxKi": "90 Septillion",
+        "race": "Saiyan",
+        "gender": "Male",
+        "affiliation": "Z Fighter",
+        "originPlanet": {"id": 2, "name": "Tierra"},
+        "transformations": [],
+    },
+    2: {
+        "id": 2,
+        "name": "Vegeta",
+        "ki": "54.000.000",
+        "maxKi": "19.84 Septillion",
+        "race": "Saiyan",
+        "gender": "Male",
+        "affiliation": "Z Fighter",
+        "originPlanet": {"id": 3, "name": "Vegeta"},
+        "transformations": [],
+    },
+    3: {
+        "id": 3,
+        "name": "Piccolo",
+        "ki": "2.000.000",
+        "maxKi": "500.000.000",
+        "race": "Namekian",
+        "gender": "Male",
+        "affiliation": "Z Fighter",
+        "originPlanet": {"id": 1, "name": "Namek"},
+        "transformations": [],
+    },
+}

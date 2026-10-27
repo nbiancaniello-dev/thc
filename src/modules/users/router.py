@@ -11,6 +11,8 @@ from modules.users.dependencies import CurrentUser, get_user_service
 from modules.users.schemas import (
     Token,
     UserCreate,
+    UserDragonBallIdsUpdate,
+    UserDragonBalls,
     UserPrivate,
     UserPublic,
     UserUpdate,
@@ -62,12 +64,12 @@ async def get_current_user_profile(
     return current_user
 
 
-@router.get("", response_model=list[UserPublic])
+@router.get("", response_model=list[UserDragonBalls])
 async def get_users(
     service: Annotated[UserService, Depends(get_user_service)],
 ):
     try:
-        return await service.get_all()
+        return await service.get_all_with_dragon_balls()
     except ResourceNotFoundError as exc:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -75,13 +77,13 @@ async def get_users(
         ) from exc
 
 
-@router.get("/{user_id}", response_model=UserPublic)
+@router.get("/{user_id}", response_model=UserDragonBalls)
 async def get_user(
     user_id: int,
     service: Annotated[UserService, Depends(get_user_service)],
 ):
     try:
-        return await service.get_by_id(user_id)
+        return await service.get_by_id_with_dragon_ball(user_id)
     except ResourceNotFoundError as exc:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -129,6 +131,31 @@ async def delete_user(
         await service.delete_user(
             user_id=user_id,
             current_user_id=current_user.id,
+        )
+    except ForbiddenError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=str(exc),
+        ) from exc
+    except ResourceNotFoundError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=str(exc),
+        ) from exc
+
+
+@router.patch("/{user_id}/dragonball", response_model=UserPrivate)
+async def update_dragon_ball_ids(
+    user_id: int,
+    update_dragon_ball_ids: UserDragonBallIdsUpdate,
+    current_user: CurrentUser,
+    service: Annotated[UserService, Depends(get_user_service)],
+):
+    try:
+        return await service.update_dragon_ball_ids(
+            id=user_id,
+            current_user_id=current_user.id,
+            dragonBallIds=update_dragon_ball_ids.dragon_ball_ids,
         )
     except ForbiddenError as exc:
         raise HTTPException(
